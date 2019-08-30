@@ -1,14 +1,15 @@
 class Cult
-    attr_reader :founding_year
+    attr_reader :founding_year, :minimum_age
     attr_accessor :name, :location, :slogan
 
     @@all = []
 
-  def initialize(name, location, founding_year, slogan)
+  def initialize(name, location, founding_year, slogan, minimum_age)
     @name = name
     @location = location
     @founding_year = founding_year
     @slogan = slogan
+    @minimum_age
     @@all << self
   end
 
@@ -41,6 +42,9 @@ class Cult
   end
 
   def recruit_follower(follower, initiation_date)
+     if self.minimum_age > follower.age 
+      return "Sorry, you must be #{cult.minimum_age} to join!"
+    end
     BloodOath.new(initiation_date, self, follower)
   end
 
